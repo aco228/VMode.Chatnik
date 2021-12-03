@@ -13,7 +13,7 @@ namespace Chatnik.Shared.Implementations
 
             try
             {
-                var ipAddress = Dns.GetHostEntry(remoteAddress).AddressList[0];
+                var ipAddress =  IPAddress.Parse(remoteAddress);
 
                 tcpListener = new TcpListener(ipAddress, port);
                 tcpListener.Start();
