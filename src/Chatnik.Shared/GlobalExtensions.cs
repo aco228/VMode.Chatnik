@@ -6,23 +6,26 @@ namespace Chatnik.Shared
 {
     public static class GlobalExtensions
     {
-        public static object CastObject(this object input, Type to)
+        public static bool CastObject(this object input, Type to, out object? response)
         {
+            response = null;
             try
             {
-                return TypeDescriptor.GetConverter(to).ConvertFrom(input.ToString());
+                response = TypeDescriptor.GetConverter(to).ConvertFrom(input.ToString()) ?? null;
             }
             catch(Exception ex)
             {
                 try
                 {
-                    return JsonConvert.DeserializeObject(JsonConvert.SerializeObject(input), to);
+                    response = JsonConvert.DeserializeObject(JsonConvert.SerializeObject(input), to);
                 }
                 catch (Exception jsonEx)
                 {
-                    return null;   
+                    return false;
                 }
             }
+
+            return response != null;
         }
         
         public static bool IsSimple(this Type type) =>

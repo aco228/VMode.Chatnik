@@ -11,8 +11,8 @@ namespace Chatnik.Shared.Implementations
         private TimeSpan? _delay = null;
         private CancellationTokenSource _cancellationTokenSource = new ();
         
-        public bool IsRunning { get => _isRunning; }
-        
+        public bool IsRunning => _isRunning;
+
         /// <summary>
         /// 
         /// </summary>

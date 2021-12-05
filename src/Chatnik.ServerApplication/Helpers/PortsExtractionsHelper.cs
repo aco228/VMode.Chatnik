@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Sockets;
+using Chatnik.Shared.Exceptions;
 using Chatnik.Shared.Models;
 
 namespace Chatnik.ServerApplication.Helpers
@@ -18,6 +19,9 @@ namespace Chatnik.ServerApplication.Helpers
 
             var publisherPort = ReadPortFromConsole("Provide port number for publisher socket: ", arg1);
             var subscriberPort = ReadPortFromConsole("Provide port number for subscriber socket: ", arg2);
+
+            if (publisherPort == subscriberPort)
+                throw new PortExtractionException(subscriberPort, publisherPort, "Port number cannot be the same");
 
             return (publisherPort, subscriberPort);
         }

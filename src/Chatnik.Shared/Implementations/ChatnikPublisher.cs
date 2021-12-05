@@ -11,14 +11,16 @@ namespace Chatnik.Shared.Implementations
         private PublisherSocket? _socket = null;
         private string _address = string.Empty;
         private string _username = string.Empty;
+        private int _port = -1;
 
-        public INetMQSocket? Socket { get => _socket; }
-        public bool IsConfigured { get => _socket != null && !_socket.IsDisposed; }
-        public string CurrentUser { get => _username; }
-        
+        public int Port => _port;
+        public INetMQSocket? Socket => _socket;
+        public bool IsConfigured => _socket is { IsDisposed: false };
+        public string CurrentUser => _username;
+
         public void Dispose()
         {
-            if (_socket == null)
+            if (_socket == null || _socket.IsDisposed)
                 return;
             
             if (!string.IsNullOrEmpty(_address))
@@ -31,6 +33,7 @@ namespace Chatnik.Shared.Implementations
         {
             _username = configureModel.Username;
             _address = configureModel.Address;
+            _port = configureModel.Port;
             _socket = new PublisherSocket();
             _socket.Bind(_address);
             

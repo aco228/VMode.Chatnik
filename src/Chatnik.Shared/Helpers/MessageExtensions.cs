@@ -37,7 +37,8 @@ namespace Chatnik.Shared.Helpers
                 }
                 else
                 {
-                    property.SetValue(result, value.CastObject(property.PropertyType));
+                    if(value.CastObject(property.PropertyType, out var dataObject))
+                        property.SetValue(result, dataObject);
                 }
             }
 

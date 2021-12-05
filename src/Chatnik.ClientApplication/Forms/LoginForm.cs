@@ -9,7 +9,7 @@ namespace Chatnik.ClientApplication.Forms
 {
     public partial class LoginForm : Form, ILoginView
     {
-        private readonly LoginFormPresenter _presenter;
+        private readonly ILoginFormPresenter _presenter;
         
         public string RemoteAddress { get => textBoxRemoteAddress.Text; set => textBoxRemoteAddress.Text = value; }
         public string SubscriberPort { get => textBoxSubscriberPort.Text; set => textBoxSubscriberPort.Text = value; }

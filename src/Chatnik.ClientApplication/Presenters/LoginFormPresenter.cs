@@ -1,12 +1,13 @@
 ﻿using System;
 using Chatnik.ClientApplication.Core.Implementations;
+using Chatnik.ClientApplication.Core.Interfaces;
 using Chatnik.ClientApplication.Views;
 using Chatnik.Shared.Interfaces;
 using Chatnik.Shared.Models;
 
 namespace Chatnik.ClientApplication.Presenters
 {
-    public interface ILoginFormPresenter
+    public interface ILoginFormPresenter : IPresenter
     {
         void OnLoginButtonClick();
     }

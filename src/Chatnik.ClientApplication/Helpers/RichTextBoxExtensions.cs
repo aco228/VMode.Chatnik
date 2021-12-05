@@ -21,7 +21,7 @@ namespace Chatnik.ClientApplication
         {
             box.InvokeIfRequired(x =>
             {
-                x.AppendText(message.Date.ToShortDateString());
+                x.AppendText(message.Date.ToLongTimeString());
                 action(box);
                 x.AppendText(Environment.NewLine);
             });

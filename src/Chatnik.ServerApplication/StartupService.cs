@@ -42,6 +42,10 @@ namespace Chatnik.ServerApplication
         {
            if (!TryToConfigureSockets())
                return;
+           
+           _logger.LogInformation($"Starting Chatnik server");
+           _logger.LogInformation($"Subscriber port at: {_subscriber.Port}");
+           _logger.LogInformation($"Publisher port at: {_publisher.Port}");
             
            _messageListener.Run();
            _messageListener.SubscriberToTopic(string.Empty, _receiveAndReturnMessageProcessor);
@@ -60,20 +64,24 @@ namespace Chatnik.ServerApplication
             
             _subscriber.Configure(new()
             {
+                Port = subscriberPort,
                 Address = _defaultApplicationConfiguration.GetAddress(subscriberPort)
             });
             
             _publisher.Configure(new ()
             {
+                Port = publisherPort,
                 Address = _defaultApplicationConfiguration.GetAddress(publisherPort)
             });
 
             return true;
         }
 
-        public Task StopAsync(CancellationToken cancellationToken)
+        public async Task StopAsync(CancellationToken cancellationToken)
         {
-            throw new System.NotImplementedException();
+            _subscriber.Close();
+            _publisher.Close();
+            _messageListener.Stop();
         }
     }
 }

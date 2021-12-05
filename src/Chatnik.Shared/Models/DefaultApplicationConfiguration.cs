@@ -6,8 +6,8 @@ namespace Chatnik.Shared.Models
     public class DefaultApplicationConfiguration
     {
         public Guid CurrentId { get; set; } = Guid.NewGuid();
-        public string[] Args { get; set; }
-        public string BaseAddress { get; protected set; }
+        public string[]? Args { get; set; }
+        public string? BaseAddress { get; protected set; }
         public int SubscriberPort { get; protected set; }
         public int PublisherPort { get; protected set; }
 
